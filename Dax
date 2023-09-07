@@ -1,0 +1,22 @@
+#YTD
+Total Sales Year to Date = TOTALYTD([Total "Name"],Date[Date])
+
+#LY : Last Year
+Total Sales LY = Calculate([Total"Name"],DATEADD(Date[Date],-1,"Day","MONTH","QUARTER","Year"))
+
+#YOY : Year of Year
+Total Sales YoY = [Total"Name"]-[Total Sales LY]
+Total Sales YoY = IF([Total Sales LY]<>0 &&,[Total"Name"]-[Total Sales LY])
+Total Sales YoY = IF([Total Sales LY]<>0 &&,[Total Sales]<>0,[Total"Name"]-[Total Sales LY])
+Total Sales YOY Perc% = DIVIDE([Total Sales YoY],Total Sales YoY])
+
+#dimDate =
+ADDCOLUMNS(
+"Year",YEAR([Date]),
+"QuarterNo", QUARTER([Date]),
+"Quarter". "Q"&"QUARTER([Date],
+"MonthNo", MONTH([Date]),
+"Month" , FORMAT([Date],"mmm'),
+"Day", DAY([Date])
+)
+
